@@ -1,29 +1,20 @@
 import ctypes
-import os
 
 # -*- coding: utf-8 -*-
 """
 Created on Wed Dec 15 16:20:03 2021
-
 @author: Kostas Zafolias
 """
-#lock desktop
+import time
+from pygame import mixer
+
+
+mixer.init()
+mixer.music.load("C:\Users\user\Desktop\sricklock\srickroll.mp3")
+mixer.music.play()
+while mixer.music.get_busy():  # wait for music to finish playing
+    time.sleep(1)
+
+# lock desktop
 ctypes.windll.user32.LockWorkStation()
-#max volume and play mp3
-from pydub import AudioSegment
-from pydub.playback import play
-
-song = AudioSegment.from_mp3("rickroll.mp3")
-
-# boost volume by 6dB
-louder_song = song + 6
-
-# reduce volume by 3dB
-quieter_song = song - 3
-
-#Play song
-play(louder_song)
-
-#save louder song 
-louder_song.export("rickroll.mp3", format='mp3')
-
+# max volume and play mp3
